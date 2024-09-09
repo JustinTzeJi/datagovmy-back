@@ -354,24 +354,31 @@ class GeneralMetaBuilder(ABC):
             [f + ".json" for f in meta_files] if meta_files else self.get_meta_files()
         )
 
-        # send telegram message
-        operation_type = "REBUILD" if rebuild else "UPDATE"
-        trigger_type = "MANUAL" if manual else "SELECTIVE"
-        operation_files = triggers.format_files_with_status_emoji(meta_files, "🔄")
-        triggers.send_telegram(
-            triggers.format_header(
-                f"PERFORMING {self.CATEGORY} {operation_type} ({trigger_type})"
-            )
-            + "\n"
-            + operation_files
-        )
+        print("Done..get meta json files in the github directory")
+
+        # # send telegram message
+        # operation_type = "REBUILD" if rebuild else "UPDATE"
+        # trigger_type = "MANUAL" if manual else "SELECTIVE"
+        # operation_files = triggers.format_files_with_status_emoji(meta_files, "🔄")
+        # triggers.send_telegram(
+        #     triggers.format_header(
+        #         f"PERFORMING {self.CATEGORY} {operation_type} ({trigger_type})"
+        #     )
+        #     + "\n"
+        #     + operation_files
+        # )
+        # print("Done..send telegram message")
 
         if rebuild:
             self.MODEL.objects.all().delete()
 
+        print("Done..delete all objects")
+
         failed = []
         meta_objects = []
         for meta in meta_files:
+            if meta == ".gitkeep":
+                continue
             try:
                 f_meta = os.path.join(self.get_github_directory(), meta)
                 f = open(f_meta)
@@ -748,6 +755,10 @@ class DataCatalogueBuilder(GeneralMetaBuilder):
                 DataCatalogue(index=i, catalogue_meta=dc_meta, data=row)
                 for i, row in enumerate(data)
             ]
+
+        # Print statement for each data catalogue processed for debug logging
+        for catalogue in catalogue_data:
+            print(f"Data catalogue {catalogue.index} done")
 
         # side quest: handle the dataviz "dropdown" building
         for dv in dataviz:
