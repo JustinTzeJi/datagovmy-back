@@ -103,7 +103,9 @@ class Migration(migrations.Migration):
         migrations.AddIndex(
             model_name="address",
             index=django.contrib.postgres.indexes.GinIndex(
-                fields=["address"], name="address_add_address_06136e_gin"
+                fields=["address"],
+                name="address_add_address_06136e_gin",
+                opclasses=["gin_trgm_ops"],
             ),
         ),
     ]

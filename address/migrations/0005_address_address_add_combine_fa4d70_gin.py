@@ -13,7 +13,9 @@ class Migration(migrations.Migration):
         migrations.AddIndex(
             model_name="address",
             index=django.contrib.postgres.indexes.GinIndex(
-                fields=["combined_address"], name="address_add_combine_fa4d70_gin"
+                fields=["combined_address"],
+                name="address_add_combine_fa4d70_gin",
+                opclasses=["gin_trgm_ops"],
             ),
         ),
     ]

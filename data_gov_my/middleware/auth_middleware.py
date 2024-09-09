@@ -39,19 +39,19 @@ class AuthMiddleware:
                     return JsonResponse(
                         {"status": 401, "message": "Unauthorized"}, status=400
                     )
-            else:
-                auth_key = cache.get("AUTH_KEY")
-                if not auth_key:
-                    auth_key = (
-                        AuthTable.objects.filter(key="AUTH_TOKEN")
-                        .values("value")
-                        .first()["value"]
-                    )
-                    cache.set("AUTH_KEY", auth_key)
-                if (req_auth_key != auth_key) and (req_auth_key != master_token):
-                    return JsonResponse(
-                        {"status": 401, "message": "Unauthorized"}, status=400
-                    )
+            # else:
+            #     auth_key = cache.get("AUTH_KEY")
+            #     if not auth_key:
+            #         auth_key = (
+            #             AuthTable.objects.filter(key="AUTH_TOKEN")
+            #             .values("value")
+            #             .first()["value"]
+            #         )
+            #         cache.set("AUTH_KEY", auth_key)
+            #     if (req_auth_key != auth_key) and (req_auth_key != master_token):
+            #         return JsonResponse(
+            #             {"status": 401, "message": "Unauthorized"}, status=400
+            #         )
 
     def is_admin_panel(self, request):
         if "/admin/" in request.path_info:

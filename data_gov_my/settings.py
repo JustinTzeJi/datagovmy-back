@@ -192,13 +192,13 @@ LANGUAGES = (
 STATIC_URL = "static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
-# File storage (django-storages settings for S3)
-DEFAULT_FILE_STORAGE = "storages.backends.s3.S3Storage"
-AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
-AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
-AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
-AWS_QUERYSTRING_AUTH = False
-AWS_S3_CUSTOM_DOMAIN = os.getenv("AWS_STORAGE_BUCKET_NAME")
+# # File storage (django-storages settings for S3)
+# DEFAULT_FILE_STORAGE = "storages.backends.s3.S3Storage"
+# AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
+# AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
+# AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
+# AWS_QUERYSTRING_AUTH = False
+# AWS_S3_CUSTOM_DOMAIN = os.getenv("AWS_STORAGE_BUCKET_NAME")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -210,25 +210,25 @@ REST_FRAMEWORK = {
 }
 
 # django-post_office
-EMAIL_BACKEND = "post_office.EmailBackend"
-EMAIL_HOST = os.getenv("EMAIL_HOST")
-EMAIL_PORT = os.getenv("EMAIL_PORT")
-DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
-EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
-EMAIL_USE_SSL = os.getenv("EMAIL_USE_SSL")
-EMAIL_USE_TLS = os.getenv("EMAIL_USE_TSL")
+# EMAIL_BACKEND = "post_office.EmailBackend"
+# EMAIL_HOST = os.getenv("EMAIL_HOST")
+# EMAIL_PORT = os.getenv("EMAIL_PORT")
+# DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
+# EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+# EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+# EMAIL_USE_SSL = os.getenv("EMAIL_USE_SSL")
+# EMAIL_USE_TLS = os.getenv("EMAIL_USE_TSL")
 
 
-POST_OFFICE = {"CELERY_ENABLED": True}
-if not DEBUG:
-    POST_OFFICE["BACKENDS"] = {"default": "django_ses.SESBackend"}
-    # django-ses
-    AWS_SES_ACCESS_KEY_ID = os.getenv("AWS_SES_ACCESS_KEY_ID")
-    AWS_SES_SECRET_ACCESS_KEY = os.getenv("AWS_SES_SECRET_ACCESS_KEY")
-    USE_SES_V2 = os.getenv("USE_SES_V2")
-    AWS_SES_REGION_NAME = os.getenv("AWS_SES_REGION_NAME")
-    AWS_SES_REGION_ENDPOINT = os.getenv("AWS_SES_REGION_ENDPOINT")
+# POST_OFFICE = {"CELERY_ENABLED": True}
+# if not DEBUG:
+#     POST_OFFICE["BACKENDS"] = {"default": "django_ses.SESBackend"}
+#     # django-ses
+#     AWS_SES_ACCESS_KEY_ID = os.getenv("AWS_SES_ACCESS_KEY_ID")
+#     AWS_SES_SECRET_ACCESS_KEY = os.getenv("AWS_SES_SECRET_ACCESS_KEY")
+#     USE_SES_V2 = os.getenv("USE_SES_V2")
+#     AWS_SES_REGION_NAME = os.getenv("AWS_SES_REGION_NAME")
+#     AWS_SES_REGION_ENDPOINT = os.getenv("AWS_SES_REGION_ENDPOINT")
 
 # Celery Configuration Options
 CELERY_BROKER_URL = os.getenv("REDIS_CONNECTION_STR")
